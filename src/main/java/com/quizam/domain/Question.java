@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Document
-public class Question extends ResourceSupport{
+public class Question extends ResourceSupport {
     @Id
     private String questionId;
     private String question;

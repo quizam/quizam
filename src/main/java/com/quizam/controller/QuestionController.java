@@ -42,7 +42,19 @@ public class QuestionController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             byQuestionId.add(linkTo(methodOn(QuestionController.class).getQuestionById(byQuestionId.getQuestionId())).withSelfRel());
+            byQuestionId.add(linkTo(methodOn(QuestionController.class).getAnswersByQuestionId(byQuestionId.getQuestionId())).withRel("answers"));
             return new ResponseEntity<>(byQuestionId, HttpStatus.OK);
+        }
+    }
+
+    @RequestMapping(value = "/answers/{id}", method = RequestMethod.GET)
+    public HttpEntity<List<String>> getAnswersByQuestionId(@PathVariable("id") String questionId) {
+        Question byQuestionId = questionService.findByQuestionId(questionId);
+        if (byQuestionId == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            byQuestionId.add(linkTo(methodOn(QuestionController.class).getAnswersByQuestionId(byQuestionId.getQuestionId())).withSelfRel());
+            return new ResponseEntity<>(byQuestionId.getAnswers(), HttpStatus.OK);
         }
     }
 
@@ -64,7 +76,7 @@ public class QuestionController {
     @RequestMapping(value = "/question/{id}", method = RequestMethod.PUT)
     public HttpEntity<?> updateQuestion(@PathVariable("id") String id, @RequestBody Question e) {
         Question byQuestionId = questionService.findByQuestionId(id);
-        if(byQuestionId == null){
+        if (byQuestionId == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             byQuestionId.setQuestion(e.getQuestion());
