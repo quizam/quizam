@@ -7,9 +7,9 @@ import java.util.List;
 public interface QuestionService {
     Question saveQuestion(Question e);
 
-    Question findByQuestionId(String questionId);
+    Question findByQuestionId(Long questionId);
 
-    void deleteByQuestionId(String questionId);
+    void deleteByQuestionId(Long questionId);
 
     void updateQuestion(Question e);
 
