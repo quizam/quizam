@@ -3,7 +3,6 @@ package com.quizam.service.impl;
 import com.quizam.domain.Question;
 import com.quizam.repository.QuestionRepository;
 import com.quizam.service.QuestionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +11,12 @@ import java.util.List;
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
-    @Autowired
+
     private QuestionRepository questionRepository;
+
+    public QuestionServiceImpl(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
 
     @Override
     public Question saveQuestion(Question e) {
@@ -21,12 +24,12 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question findByQuestionId(String questionId) {
+    public Question findByQuestionId(Long questionId) {
         return questionRepository.findOne(questionId);
     }
 
     @Override
-    public void deleteByQuestionId(String questionId) {
+    public void deleteByQuestionId(Long questionId) {
         questionRepository.delete(questionId);
     }
 

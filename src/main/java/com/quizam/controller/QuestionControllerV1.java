@@ -1,12 +1,12 @@
 package com.quizam.controller;
 
+import com.quizam.config.QuizamConstants;
 import com.quizam.domain.Question;
 import com.quizam.service.QuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,10 +26,15 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 )
 
 @RestController
-public class QuestionController {
+@RequestMapping(QuizamConstants.API_URL+QuizamConstants.APP_V1+"/questions")
+public class QuestionControllerV1 {
 
-    @Autowired
+
     private QuestionService questionService;
+
+    public QuestionControllerV1(QuestionService questionService) {
+        this.questionService = questionService;
+    }
 
     @ApiOperation(
             value = "List of questions",
@@ -41,17 +46,14 @@ public class QuestionController {
                     @ApiResponse(code = 422, message = "Invalid input"),
             }
     )
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/quizam/questions/v1/list/"
-    )
+    @GetMapping("/list/")
     public HttpEntity<List<Question>> getAllQuestions() {
         List<Question> questions = questionService.findAll();
         if (questions.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
-            questions.forEach(e -> e.add(linkTo(methodOn(QuestionController.class).getAllQuestions()).withRel("questions")));
-            questions.forEach(e -> e.add(linkTo(methodOn(QuestionController.class).getQuestionById(e.getQuestionId())).withSelfRel()));
+            questions.forEach(e -> e.add(linkTo(methodOn(QuestionControllerV1.class).getAllQuestions()).withRel("questions")));
+            questions.forEach(e -> e.add(linkTo(methodOn(QuestionControllerV1.class).getQuestionById(e.getQuestionId())).withSelfRel()));
             return new ResponseEntity<>(questions, HttpStatus.OK);
         }
     }
@@ -66,17 +68,14 @@ public class QuestionController {
                     @ApiResponse(code = 422, message = "Invalid input"),
             }
     )
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/quizam/questions/v1/question/{id}"
-    )
-    public HttpEntity<Question> getQuestionById(@PathVariable("id") String questionId) {
+    @GetMapping("/question/{id}")
+    public HttpEntity<Question> getQuestionById(@PathVariable("id") Long questionId) {
         Question byQuestionId = questionService.findByQuestionId(questionId);
         if (byQuestionId == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            byQuestionId.add(linkTo(methodOn(QuestionController.class).getQuestionById(byQuestionId.getQuestionId())).withSelfRel());
-            byQuestionId.add(linkTo(methodOn(QuestionController.class).getAnswersByQuestionId(byQuestionId.getQuestionId())).withRel("answers"));
+            byQuestionId.add(linkTo(methodOn(QuestionControllerV1.class).getQuestionById(byQuestionId.getQuestionId())).withSelfRel());
+            byQuestionId.add(linkTo(methodOn(QuestionControllerV1.class).getAnswersByQuestionId(byQuestionId.getQuestionId())).withRel("answers"));
             return new ResponseEntity<>(byQuestionId, HttpStatus.OK);
         }
     }
@@ -91,16 +90,13 @@ public class QuestionController {
                     @ApiResponse(code = 422, message = "Invalid input"),
             }
     )
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/quizam/questions/v1/answers/{id}"
-    )
-    public HttpEntity<List<String>> getAnswersByQuestionId(@PathVariable("id") String questionId) {
+    @GetMapping("/answers/{id}")
+    public HttpEntity<List<String>> getAnswersByQuestionId(@PathVariable("id") Long questionId) {
         Question byQuestionId = questionService.findByQuestionId(questionId);
         if (byQuestionId == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            byQuestionId.add(linkTo(methodOn(QuestionController.class).getAnswersByQuestionId(byQuestionId.getQuestionId())).withSelfRel());
+            byQuestionId.add(linkTo(methodOn(QuestionControllerV1.class).getAnswersByQuestionId(byQuestionId.getQuestionId())).withSelfRel());
             return new ResponseEntity<>(byQuestionId.getAnswers(), HttpStatus.OK);
         }
     }
@@ -115,10 +111,7 @@ public class QuestionController {
                     @ApiResponse(code = 422, message = "Invalid input"),
             }
     )
-    @RequestMapping(
-            method = RequestMethod.POST,
-            value = "/quizam/questions/v1/question/"
-    )
+    @PostMapping("/question/")
     public HttpEntity<?> saveQuestion(@RequestBody Question e) {
         if (questionService.questionExists(e)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -143,11 +136,8 @@ public class QuestionController {
                     @ApiResponse(code = 422, message = "Invalid input"),
             }
     )
-    @RequestMapping(
-            method = RequestMethod.PUT,
-            value = "/quizam/questions/v1/question/{id}"
-    )
-    public HttpEntity<?> updateQuestion(@PathVariable("id") String id, @RequestBody Question e) {
+    @PutMapping("/question/{id}")
+    public HttpEntity<?> updateQuestion(@PathVariable("id") Long id, @RequestBody Question e) {
         Question byQuestionId = questionService.findByQuestionId(id);
         if (byQuestionId == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -159,7 +149,7 @@ public class QuestionController {
             byQuestionId.setSubject(e.getSubject());
             byQuestionId.setTopic(e.getTopic());
             questionService.updateQuestion(byQuestionId);
-            byQuestionId.add(linkTo(methodOn(QuestionController.class).getQuestionById(byQuestionId.getQuestionId())).withSelfRel());
+            byQuestionId.add(linkTo(methodOn(QuestionControllerV1.class).getQuestionById(byQuestionId.getQuestionId())).withSelfRel());
             return new ResponseEntity<>(byQuestionId, HttpStatus.OK);
         }
     }
@@ -174,11 +164,8 @@ public class QuestionController {
                     @ApiResponse(code = 422, message = "Invalid input"),
             }
     )
-    @RequestMapping(
-            method = RequestMethod.DELETE,
-            value = "/quizam/questions/v1/question/{id}"
-    )
-    public ResponseEntity<?> deleteQuestion(@PathVariable("id") String questionId) {
+    @DeleteMapping("/question/{id}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable("id") Long questionId) {
         questionService.deleteByQuestionId(questionId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -193,10 +180,7 @@ public class QuestionController {
                     @ApiResponse(code = 422, message = "Invalid input"),
             }
     )
-    @RequestMapping(
-            method = RequestMethod.DELETE,
-            value = "/quizam/questions/v1/all/questions/"
-    )
+    @DeleteMapping("/all/questions/")
     public ResponseEntity<?> deleteAll() {
         questionService.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
