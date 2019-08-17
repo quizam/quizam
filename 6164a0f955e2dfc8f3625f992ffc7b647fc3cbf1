@@ -1,0 +1,175 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c03f1955_4853abe2",
+        "filename": "src/main/java/com/quizam/QuizamManagerApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "not required as of now",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1f1c24d_44ddfc91",
+        "filename": "src/main/java/com/quizam/QuizamManagerApplication.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "we will write a boot loader file and mongobee for chnage set",
+      "range": {
+        "startLine": 26,
+        "startChar": 26,
+        "endLine": 26,
+        "endChar": 30
+      },
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e261ba3_ff8bc56c",
+        "filename": "src/main/java/com/quizam/controller/QuestionController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "@Get request can be used",
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4945a011_a7aa802d",
+        "filename": "src/main/java/com/quizam/controller/QuestionController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "@@get request can be used",
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89d675fa_6619d04a",
+        "filename": "src/main/java/com/quizam/controller/QuestionController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "@postrequest can be used",
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d2551478_43068f12",
+        "filename": "src/main/java/com/quizam/controller/QuestionController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "@put request can be used",
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64e7abbf_8b9a7494",
+        "filename": "src/main/java/com/quizam/controller/QuestionController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "@DeleteRequest can be used",
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30b9c5a6_e2ba2770",
+        "filename": "src/main/java/com/quizam/controller/QuestionController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "@DeleteRequest can be used",
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26824a29_43d1d1cd",
+        "filename": "src/main/java/com/quizam/domain/Question.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:01:50Z",
+      "side": 1,
+      "message": "we will be using lombok for the project so i will remove the getter and setter",
+      "range": {
+        "startLine": 32,
+        "startChar": 18,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "6164a0f955e2dfc8f3625f992ffc7b647fc3cbf1",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
