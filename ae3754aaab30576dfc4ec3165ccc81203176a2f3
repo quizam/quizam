@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58b8168e_f2c3da26",
+        "filename": "src/main/java/com/quizam/controller/QuestionController.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1016911
+      },
+      "writtenOn": "2019-08-17T08:06:04Z",
+      "side": 1,
+      "message": "we can use the @Get request annotation",
+      "range": {
+        "startLine": 94,
+        "startChar": 5,
+        "endLine": 94,
+        "endChar": 19
+      },
+      "revId": "ae3754aaab30576dfc4ec3165ccc81203176a2f3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
