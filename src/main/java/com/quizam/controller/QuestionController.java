@@ -2,6 +2,10 @@ package com.quizam.controller;
 
 import com.quizam.domain.Question;
 import com.quizam.service.QuestionService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,14 +20,31 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+
+@Api(
+        tags = "Questions for test"
+)
+
 @RestController
-@RequestMapping("/questions")
 public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
 
-    @RequestMapping(value = "/list/", method = RequestMethod.GET)
+    @ApiOperation(
+            value = "List of questions",
+            notes = "This API fetches the Quizam questions with provided criteria."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Success"),
+                    @ApiResponse(code = 422, message = "Invalid input"),
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/quizam/questions/v1/list/"
+    )
     public HttpEntity<List<Question>> getAllQuestions() {
         List<Question> questions = questionService.findAll();
         if (questions.isEmpty()) {
@@ -35,7 +56,20 @@ public class QuestionController {
         }
     }
 
-    @RequestMapping(value = "/question/{id}", method = RequestMethod.GET)
+    @ApiOperation(
+            value = "Question by questionId",
+            notes = "This API fetches the Quizam question by provided question Id."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Success"),
+                    @ApiResponse(code = 422, message = "Invalid input"),
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/quizam/questions/v1/question/{id}"
+    )
     public HttpEntity<Question> getQuestionById(@PathVariable("id") String questionId) {
         Question byQuestionId = questionService.findByQuestionId(questionId);
         if (byQuestionId == null) {
@@ -47,7 +81,20 @@ public class QuestionController {
         }
     }
 
-    @RequestMapping(value = "/answers/{id}", method = RequestMethod.GET)
+    @ApiOperation(
+            value = "Question by questionId",
+            notes = "This API fetches the Quizam question's answers by provided question id."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Success"),
+                    @ApiResponse(code = 422, message = "Invalid input"),
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/quizam/questions/v1/answers/{id}"
+    )
     public HttpEntity<List<String>> getAnswersByQuestionId(@PathVariable("id") String questionId) {
         Question byQuestionId = questionService.findByQuestionId(questionId);
         if (byQuestionId == null) {
@@ -58,7 +105,20 @@ public class QuestionController {
         }
     }
 
-    @RequestMapping(value = "/question/", method = RequestMethod.POST)
+    @ApiOperation(
+            value = "Add question to the question set",
+            notes = "This API provides facility to add a new question to Quizam question set."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Success"),
+                    @ApiResponse(code = 422, message = "Invalid input"),
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.POST,
+            value = "/quizam/questions/v1/question/"
+    )
     public HttpEntity<?> saveQuestion(@RequestBody Question e) {
         if (questionService.questionExists(e)) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -73,7 +133,20 @@ public class QuestionController {
         }
     }
 
-    @RequestMapping(value = "/question/{id}", method = RequestMethod.PUT)
+    @ApiOperation(
+            value = "Modify question in the question set",
+            notes = "This API provides facility to modify the existing question of Quizam question set."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Success"),
+                    @ApiResponse(code = 422, message = "Invalid input"),
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.PUT,
+            value = "/quizam/questions/v1/question/{id}"
+    )
     public HttpEntity<?> updateQuestion(@PathVariable("id") String id, @RequestBody Question e) {
         Question byQuestionId = questionService.findByQuestionId(id);
         if (byQuestionId == null) {
@@ -91,13 +164,39 @@ public class QuestionController {
         }
     }
 
-    @RequestMapping(value = "/question/{id}", method = RequestMethod.DELETE)
+    @ApiOperation(
+            value = "Remove question by id",
+            notes = "This API provides facility to remove the existing question from Quizam question set."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Success"),
+                    @ApiResponse(code = 422, message = "Invalid input"),
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/quizam/questions/v1/question/{id}"
+    )
     public ResponseEntity<?> deleteQuestion(@PathVariable("id") String questionId) {
         questionService.deleteByQuestionId(questionId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = "/question/", method = RequestMethod.DELETE)
+    @ApiOperation(
+            value = "Remove all questions",
+            notes = "This API provides facility to remove all the existing question from Quizam question set."
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Success"),
+                    @ApiResponse(code = 422, message = "Invalid input"),
+            }
+    )
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/quizam/questions/v1/all/questions/"
+    )
     public ResponseEntity<?> deleteAll() {
         questionService.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
