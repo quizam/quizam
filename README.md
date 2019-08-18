@@ -12,7 +12,8 @@ To run the Application
 mvn install
 mvn spring-boot:run
 ```
-##Configurations
+## Configurations
+
 Application by default requires **MongoDB** to be running on you system locally on port `27017`.
 
 You can change the default configs from  `\quizapi\src\main\resources\application.properties`
@@ -26,7 +27,9 @@ spring.data.mongodb.database=quizam
 server.port=9090
 ```
 
-##Important Links
+## Important Links
+
 For suggestions and improvement to the project contribute using gerrit.
-Use this link to commmit review codes 
-``git clone "https://review.gerrithub.io/quizam/quizapi" && (cd "quizapi" && mkdir -p .git/hooks && curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://review.gerrithub.io/tools/hooks/commit-msg; chmod +x `git rev-parse --git-dir`/hooks/commit-msg)``
+Use this link to commmit review codes
+ 
+```git clone "https://review.gerrithub.io/quizam/quizapi" && (cd "quizapi" && mkdir -p .git/hooks && curl -Lo `git rev-parse --git-dir`/hooks/commit-msg https://review.gerrithub.io/tools/hooks/commit-msg; chmod +x `git rev-parse --git-dir`/hooks/commit-msg)```
