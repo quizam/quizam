@@ -148,7 +148,7 @@ public class QuestionControllerV1 {
             byQuestionId.setAuthor(e.getAuthor());
             byQuestionId.setSubject(e.getSubject());
             byQuestionId.setTopic(e.getTopic());
-            questionService.updateQuestion(byQuestionId);
+            byQuestionId = questionService.updateQuestion(byQuestionId);
             byQuestionId.add(linkTo(methodOn(QuestionControllerV1.class).getQuestionById(byQuestionId.getQuestionId())).withSelfRel());
             return new ResponseEntity<>(byQuestionId, HttpStatus.OK);
         }
