@@ -1,8 +1,7 @@
-package com.quizam.service.impl;
+package com.quizam.service;
 
 import com.quizam.domain.Question;
 import com.quizam.repository.QuestionRepository;
-import com.quizam.service.QuestionService;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 

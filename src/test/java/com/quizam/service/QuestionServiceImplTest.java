@@ -1,4 +1,4 @@
-package com.quizam.service.impl;
+package com.quizam.service;
 
 import com.quizam.domain.Question;
 import com.quizam.repository.QuestionRepository;
