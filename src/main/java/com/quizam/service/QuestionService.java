@@ -11,7 +11,7 @@ public interface QuestionService {
 
     void deleteByQuestionId(Long questionId);
 
-    void updateQuestion(Question e);
+    Question updateQuestion(Question e);
 
     boolean questionExists(Question e);
 

@@ -19,23 +19,23 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public Question findByQuestionId(Long questionId) {
+        return questionRepository.findById(questionId).orElse(null);
+    }
+
+    @Override
+    public List<Question> findAll() {
+        return questionRepository.findAll();
+    }
+
+    @Override
     public Question saveQuestion(Question e) {
         return questionRepository.save(e);
     }
 
     @Override
-    public Question findByQuestionId(Long questionId) {
-        return questionRepository.findOne(questionId);
-    }
-
-    @Override
-    public void deleteByQuestionId(Long questionId) {
-        questionRepository.delete(questionId);
-    }
-
-    @Override
-    public void updateQuestion(Question e) {
-        questionRepository.save(e);
+    public Question updateQuestion(Question e) {
+        return questionRepository.save(e);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Question> findAll() {
-        return questionRepository.findAll();
+    public void deleteByQuestionId(Long questionId) {
+        questionRepository.deleteById(questionId);
     }
 
     @Override

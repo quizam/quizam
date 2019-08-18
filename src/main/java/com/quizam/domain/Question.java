@@ -1,9 +1,11 @@
 package com.quizam.domain;
 
 import lombok.*;
+import org.springframework.data.annotation.AccessType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
 import java.util.List;
@@ -31,6 +33,7 @@ public class Question extends ResourceSupport {
     private String subject;
     private String topic;
 
+    @Builder
     public Question(Long questionId, @NonNull String question, @NonNull List<String> options, @NonNull List<String> answers, String author, String subject, String topic) {
         this.questionId = questionId;
         this.question = question;
@@ -39,5 +42,12 @@ public class Question extends ResourceSupport {
         this.author = author;
         this.subject = subject;
         this.topic = topic;
+    }
+
+    @AccessType(AccessType.Type.PROPERTY)
+    public void setLinks(List<Link> links) {
+        List<Link> actual = super.getLinks();
+        actual.clear();
+        actual.addAll(links);
     }
 }
