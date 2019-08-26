@@ -3,8 +3,6 @@ package com.quizam;
 import com.github.mongobee.Mongobee;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import com.quizam.repository.QuestionRepository;
-import com.quizam.service.common.SequenceGeneratorService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
