@@ -1,0 +1,18 @@
+schema{
+ query: Query
+}
+
+type Query{
+ allQuestions: [Question]
+    question(id: Long): Question
+}
+
+type Question{
+    questionId: Long
+    question: String
+    options: [String]
+    answers: [String]
+    author: String
+    subject: String
+    topic: String
+}
